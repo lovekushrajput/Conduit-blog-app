@@ -287,3 +287,7 @@ footer {
   padding: 2rem;
   font-weight: 500;
 }
+
+input:disabled{
+  opacity: 0.8;
+}
