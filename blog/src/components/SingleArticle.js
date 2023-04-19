@@ -1,11 +1,15 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { articlesURL } from '../utils/contants';
 import Loading from './Loading'
+import { format } from 'date-fns';
+import { useAuth } from '../utils/auth';
+
 
 function IndividualArticle() {
     let { slug } = useParams()
     let [data, setData] = useState({})
+    const auth = useAuth()
 
 
     const fetchSingleArticle = async () => {
@@ -23,22 +27,74 @@ function IndividualArticle() {
     }, [])
 
 
+
     return (
-        <div className='container'>
-            {data.article ? <ArticleUI article={data.article} /> : <Loading err={data.articlesErr} name={'article'} />}
+        <div>
+            {data.article ?
+                <>
+                    <ArticleUI article={data.article} />
+                    {auth.user && <CommentBox />}
+
+                </>
+                : <Loading err={data.articlesErr} name={'article'} />}
         </div>
     );
 }
 
 
 function ArticleUI({ article }) {
-    let { title, description, body } = article
+    let { title,body, tagList, author, createdAt } = article
+    let { username, image } = author
 
     return (
         <div>
-            <h2 className='m-b-1' style={{ fontSize: '2rem', fontWeight: 'bold' }}>{title}</h2>
-            <h3 className='m-b-1'>{description}</h3>
-            <p>{body}</p>
+            <div className='hero--singleArticle'>
+                <div className='container'>
+                    <h2 >{title}</h2>
+                    <div className="flex">
+                        <article className='flex'>
+                            <Link to={'/profile/' + username}>
+                                <img src={image} alt={image} className='img-sm' />
+                            </Link>
+                            <div>
+                                <Link to={'/profile/' + username}>{username}</Link>
+                                <p>{format(new Date(createdAt), 'E LLL dd Y')}</p>
+                            </div>
+                        </article>
+                        {
+                            <div></div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+            <div className='container'>
+                <p>{body}</p>
+                <ul className='flex'>
+                    {tagList.map((tag) => <li key={tag} className='tags--btn margin-top-1' >{tag}</li>)}
+                </ul>
+            </div>
+
+            <hr />
+        </div>
+    )
+}
+
+
+
+function CommentBox() {
+    return (
+        <div className='container'>
+            <div>
+                <form style={{ border: '1px solid black', width: '50.1%' }}>
+                    <textarea rows="6" placeholder='write a Commet...' style={{ display: 'block' }}></textarea>
+                    <div className='flex'>
+                        <img src='https://api.realworld.io/images/smiley-cyrus.jpeg' alt='smily' className='img-sm' />
+                        <button>Publish Comment</button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

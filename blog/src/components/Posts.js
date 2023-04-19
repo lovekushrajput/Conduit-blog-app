@@ -1,7 +1,7 @@
 import Loading from "./Loading"
 import Post from "./Post"
 
-function Posts({ articles, error }) {
+function Posts({ articles, error ,setData}) {
 
     if (!articles) {
         return (<Loading err={error} name='articles' />)
@@ -13,7 +13,7 @@ function Posts({ articles, error }) {
 
     return (
         <>
-            {articles.map(article => <Post key={article.slug} article={article} />)}
+            {articles.map(article => <Post key={article.slug} article={article} setData={setData}/>)}
         </>
     )
 }
