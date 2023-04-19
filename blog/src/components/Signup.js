@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginUser, registerUser } from '../utils/contants'
+import { registerUser } from '../utils/contants'
 import { useAuth } from '../utils/auth';
 
-function Register() {
+
+function Signup() {
     const [state, setState] = useState({
         username: '',
         email: '',
         password: '',
-        token: null,
         errors: {
             username: '',
             email: '',
@@ -22,11 +22,6 @@ function Register() {
 
 
 
-    useEffect(() => {
-        if (state.token) {
-            loginUser(setSignError, state, auth, navigate)
-        }
-    }, [state.token])
 
     const handleChange = ({ target }) => {
         let { value, name } = target
@@ -62,7 +57,7 @@ function Register() {
             return alert('Please fill the form')
         }
 
-        registerUser(setState, setSignError, state)
+        registerUser(setSignError, auth, state, navigate)
     }
 
     if (typeof signError === 'object') {
@@ -115,16 +110,23 @@ function Register() {
                 <span>{state.errors.password}</span>
                 <br />
                 <div>
-                    <input
+                    {/* <input
                         type='submit'
-                        value={'Sign up'}
+                        value={<Spinner/>}
+                   
+                    /> */}
+
+                    <button
+                        type='submit'
                         disabled={state.errors.email || state.errors.username || state.errors.password}
-                    />
+                    >
+                        Signup
+                    </button>
                 </div>
             </form>
         </div>
     )
 }
 
-export default Register
+export default Signup
 

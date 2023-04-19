@@ -22,7 +22,7 @@ function Pagination({ data, handlePagination }) {
         return
     }
     return (
-        <div className='btn'>
+        <div style={{ gridTemplateColumns: `repeat(${pageCount}, 5%)` }} className='btns--pagination'>
             {paginationArr.map(renderPaginationButtons)}
         </div>
     )

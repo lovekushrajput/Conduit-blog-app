@@ -4,10 +4,10 @@ import { loginUser } from '../utils/contants';
 import { useAuth } from '../utils/auth';
 
 
-function Login() {
+function Signin() {
     const [state, setState] = useState({
-        email: '',
-        password: '',
+        email: 'mamaji123@gmail.com',
+        password: 'mamaji1234',
         errors: {
             email: '',
             password: ''
@@ -84,7 +84,7 @@ function Login() {
                 <div>
                     <input
                         type='submit'
-                        value={'Sign up'}
+                        value={'Signin'}
                         disabled={state.errors.email || state.errors.password}
                     />
                 </div>
@@ -94,4 +94,4 @@ function Login() {
 }
 
 
-export default Login
+export default Signin

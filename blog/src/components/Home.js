@@ -1,4 +1,4 @@
-import { fetchArticles, fetchTags, fetchArticlesByAuthor } from "../utils/contants";
+import { fetchArticles, fetchTags, currentUserURL } from "../utils/contants";
 import { useEffect, useState } from "react";
 import Banner from "./Banner";
 import SideBar from "./Sidebar";
@@ -10,51 +10,30 @@ import { useAuth } from "../utils/auth";
 
 
 function Home() {
-    let [data, setData] = useState({ 'limit': 10, 'offset': 0 });
-    let [activeTab, setActiveTab] = useState('');
-    const [loginActiveTab, setLoginActiveTab] = useState('yourFeed')
     const auth = useAuth();
+    const [data, setData] = useState({ 'limit': 10, 'offset': 0 });
+    const [activeTab, setActiveTab] = useState(auth.user && auth.user.username || '');
 
 
     useEffect(() => {
-        fetchTags(setData)
+        fetchTags(setData, auth)
     }, [])
 
     useEffect(() => {
-        if (auth.user) {
-            if (loginActiveTab === 'yourFeed' || loginActiveTab === auth.user.username) {
-                setLoginActiveTab(auth.user.username)
-                fetchArticlesByAuthor(data, setData, loginActiveTab)
-            } else {
-                fetchArticles(data, setData, activeTab)
-            }
-        } else {
-            fetchArticles(data, setData, activeTab)
-        }
+        fetchArticles(data, setData, activeTab, auth)
 
         return () => setData(prevState => ({ ...prevState, articles: null }))
 
-    }, [loginActiveTab, activeTab, data.offset, auth.user])
+    }, [activeTab, data.offset, auth.user])
 
 
     const addTab = (tab) => {
-        // if login
-        if (auth.user) {
-            setLoginActiveTab('')
-        }
         setActiveTab(tab)
+
+        // because all popular tags availabel in 1st page
         setData(prevState => ({ ...prevState, offset: 0 }))
     }
 
-
-
-    const removeTab = (name) => {
-        // if login
-        if (auth.user) {
-            setLoginActiveTab(name)
-        }
-        setActiveTab('')
-    }
 
     const handlePagination = (page) => {
         const offset = (page - 1) * 10
@@ -67,14 +46,16 @@ function Home() {
         <>
             <Banner />
             <main className="container">
-                <FeedNav removeTab={removeTab} loginActiveTab={loginActiveTab} activeTab={activeTab}/>
+                <FeedNav
+                    addTab={addTab}
+                    activeTab={activeTab} />
                 <hr />
                 <section className={'article'}>
                     <div>
-                        <Posts articles={articles} error={articlesErr} />
+                        <Posts articles={articles} error={articlesErr} setData={setData} />
                         <Pagination data={data} handlePagination={handlePagination} />
                     </div>
-                    <SideBar tags={tags} addTab={addTab} error={tagsErr} />
+                    <SideBar tags={tags} addTab={addTab} error={tagsErr} activeTab={activeTab} />
                 </section>
             </main>
         </>
