@@ -7,8 +7,8 @@ import Footer from './Footer';
 
 function Signin() {
     const [state, setState] = useState({
-        email: 'mamaji123@gmail.com',
-        password: 'mamaji1234',
+        email: '',
+        password: '',
         errors: {
             email: '',
             password: ''
@@ -53,11 +53,11 @@ function Signin() {
 
     return (
         <>
-            <div className='flex flex-col items-center'>
-                <h2 className='text-4xl'>Sign in</h2>
+            <div className='flex flex-col items-center max-[520px]:px-2'>
+                <h2 className='text-4xl text max-[520px]:text-2xl mt-3'>Sign in</h2>
                 <Link to={'/register'} className='text-primary-100 hover:text-primary-200 hover:underline my-2 text-sm'>Need an account?</Link>
 
-                <form onSubmit={handleSubmit} className='flex flex-col w-2/5'>
+                <form onSubmit={handleSubmit} className='flex flex-col w-2/5 max-[520px]:w-full'>
                     <ul className='ml-8 mb-6 mt-3'>
                         {state.errors.email && <li className={'list-disc text-red-700 font-semibold'}>{state.errors.email}</li>}
                         {state.errors.password && <li className={'list-disc text-red-700 font-semibold'}>{state.errors.password}</li>}

@@ -59,8 +59,8 @@ function Signup() {
 
     return (
         <>
-            <div className='flex flex-col items-center'>
-                <h2 className='text-4xl'>Sign up</h2>
+            <div className='flex flex-col items-center max-[520px]:px-2'>
+                <h2 className='text-4xl max-[520px]:text-2xl mt-3'>Sign up</h2>
                 <Link to={'/login'} className='text-primary-100 hover:text-primary-200 hover:underline my-2 text-sm'>Have an account?</Link>
                 <ul className='ml-8 mb-6 mt-3'>
                     {state.errors.username && <li className={'list-disc text-red-700 font-semibold'}>{state.errors.username}</li>}
@@ -71,7 +71,7 @@ function Signup() {
 
 
                 <form onSubmit={handleRegister}
-                    className='flex flex-col w-2/5'>
+                    className='flex flex-col w-2/5 max-[520px]:w-full'>
                     <input
                         value={state.username}
                         type='text'
@@ -113,7 +113,7 @@ function Signup() {
             </div>
 
             <div className='absolute bottom-0 w-full'>
-                <Footer/>
+                <Footer />
             </div>
         </>
     )
