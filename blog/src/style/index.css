@@ -1,4 +1,4 @@
-html,
+/* html,
 body,
 div,
 span,
@@ -85,9 +85,9 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-}
+} */
 /* HTML5 display-role reset for older browsers */
-article,
+/* article,
 aside,
 details,
 figcaption,
@@ -121,9 +121,9 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-}
+} */
 /* custom */
-*,
+/* *,
 *::before,
 *::after {
   box-sizing: border-box;
@@ -177,10 +177,10 @@ footer {
 
 input:disabled {
   opacity: 0.8;
-}
+} */
 
 /* common */
-.cursor {
+/* .cursor {
   cursor: pointer;
 }
 
@@ -226,9 +226,9 @@ input:disabled {
 
 .justify-space {
   justify-content: space-between;
-}
+} */
 
-/* banner */
+/* banner
 .hero--banner {
   background-color: rgb(92, 184, 92);
   color: white;
@@ -245,10 +245,10 @@ input:disabled {
   color: white;
   font-size: 1.4rem;
   margin-top: 0.5rem;
-}
+} */
 
 /* posts */
-.article {
+/* .article {
   display: grid;
   grid-template-columns: 70% 25%;
   justify-content: space-between;
@@ -277,10 +277,10 @@ input:disabled {
 
 .post--a {
   color: rgb(159, 161, 169);
-}
+} */
 
 /* sidebar */
-.sidebar {
+/* .sidebar {
   background-color: rgb(243, 243, 243);
   display: flex;
   flex-wrap: wrap;
@@ -319,11 +319,10 @@ input:disabled {
   color: rgb(173,170,170);
   font-size: 0.9rem;
   font-weight: 100;
-}
-
+} */
 
 /* pagination */
-.btns--pagination {
+/* .btns--pagination {
   display: grid;
   border: 1px solid rgb(221, 221, 221);
   cursor: pointer;
@@ -334,7 +333,7 @@ input:disabled {
   padding: 0.5rem 0;
 }
 
-/* single*/
+single
 .hero--singleArticle {
   background-color: rgb(51, 51, 51);
   padding: 2rem 0;
@@ -352,10 +351,10 @@ input:disabled {
 .activeBtn {
   background-color: rgb(92, 184, 92);
   color: white;
-}
+} */
 
 /* spinner */
-.loader {
+/* .loader {
   animation: rotate 2s linear infinite;
 }
 
@@ -385,7 +384,7 @@ input:disabled {
 }
 
 img {
-  width: 100%; /* height: 10%; */
+  width: 100%; 
 }
 
 .img-sm {
@@ -394,17 +393,19 @@ img {
   border-radius: 50%;
 }
 
-/* .img--post {
-  width: 20%;
-} */
-
 .hero--profile {
   background: rgb(243, 243, 243);
   padding: 2rem 0;
 }
 
+/* .img--post {
+  width: 20%;
+} */
 
-
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
+
+.active {
+  color: #9d0404;
+}

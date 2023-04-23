@@ -6,6 +6,7 @@ import Posts from "./Posts";
 import Pagination from "./Pagination";
 import FeedNav from "./FeedNav";
 import { useAuth } from "../utils/auth";
+import Footer from "./Footer";
 
 
 
@@ -44,20 +45,18 @@ function Home() {
     const { articles, articlesErr, tags, tagsErr } = data
     return (
         <>
-            <Banner />
-            <main className="container">
-                <FeedNav
-                    addTab={addTab}
-                    activeTab={activeTab} />
-                <hr />
-                <section className={'article'}>
-                    <div>
+            {!auth.user && <Banner />}
+            <main className='lg:container lg:px-10 md:container sm:container py-0 md:px-10  max-[520px]:px-2 mt-0 mb-0 mr-auto ml-auto'>
+                <section className={'lg:flex lg:justify-between mb-8'}>
+                    <div className="lg:w-2/3">
+                        <FeedNav addTab={addTab} activeTab={activeTab} />
                         <Posts articles={articles} error={articlesErr} setData={setData} />
                         <Pagination data={data} handlePagination={handlePagination} />
                     </div>
                     <SideBar tags={tags} addTab={addTab} error={tagsErr} activeTab={activeTab} />
                 </section>
             </main>
+            {articles && <Footer />}
         </>
     )
 }

@@ -1,19 +1,18 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../utils/auth"
-
+import { FiHash } from 'react-icons/fi'
 
 function FeedNav({ activeTab, addTab }) {
     const auth = useAuth()
 
     return (
-        <nav>
-            <ul className={activeTab || auth.user ? 'flex' : ''} style={{ marginTop: '1rem' }}>
+        <nav className="mt-10">
+            <ul className={activeTab || auth.user ? 'flex' : ''}>
                 {
                     auth.user &&
                     <li>
                         <Link to={'/'}
-                            className={activeTab === auth.user.username ? 'active' : ''}
-                            // className={loginActiveTab === auth.user.username || loginActiveTab === 'yourFeed' ? 'active' : 'cursor'}
+                            className={activeTab === auth.user.username ? 'text-primary-100 border-b-2 border-primary-100 px-3 pb-2' : 'text-secondary-100 px-3'}
                             onClick={() => addTab(auth.user.username)}
                         >
                             Your Feed
@@ -23,9 +22,8 @@ function FeedNav({ activeTab, addTab }) {
                 }
 
                 <li>
-                    <Link to={'/'} style={{ marginLeft: '1rem' }}
-                        className={activeTab === '' ? 'active' : ''}
-                        // className={auth.user ? (loginActiveTab === 'global' ? 'active' : 'cursor') : (activeTab === '' ? 'active' : 'cursor')}
+                    <Link to={'/'}
+                        className={activeTab === '' ? 'text-primary-100 border-b-2 border-primary-100 pb-2 ml-8 px-3' : 'ml-8 text-secondary-100   px-3'}
                         onClick={() => addTab('')
                         }
                     >
@@ -37,26 +35,32 @@ function FeedNav({ activeTab, addTab }) {
 
                 <li>
                     {
-                        // auth.user ? activeTab !== auth.user.username : ''
-                        // activeTab !== auth.user && auth.user.username || activeTab !== '' &&
-                        // <Link to={'/'} style={{ marginLeft: '1rem' }} className={activeTab !== '' && activeTab !== auth.user.username ? 'active' : ''}>
-                        //     # {activeTab}
-                        // </Link>
                         auth.user ?
                             activeTab !== '' &&
                             activeTab !== auth.user.username &&
-                            <Link to={'/'} style={{ marginLeft: '1rem' }} className={activeTab !== '' && activeTab !== auth.user.username ? 'active' : ''}>
-                                # {activeTab}
+                            <Link to={'/'}
+                                className={
+                                    activeTab !== '' && activeTab !== auth.user.username ? 'text-primary-100 ml-8 flex border-b-2 border-primary-100 px-3 pb-2' : ''
+                                }>
+
+                                <FiHash className="font-bold text-xl" />
+                                <span>
+                                    {activeTab}
+                                </span>
                             </Link>
                             :
                             activeTab !== '' &&
-                            <Link to={'/'} style={{ marginLeft: '1rem' }} className={activeTab !== '' ? 'active' : ''}>
-                                # {activeTab}
+                            <Link to={'/'} className={activeTab !== '' ? 'flex text-primary-100 ml-8  border-b-2 border-primary-100 px-3 pb-2' : ''}>
+
+                                <FiHash className="font-bold text-xl" />
+                                <span>
+                                    {activeTab}
+                                </span>
                             </Link>
                     }
                 </li>
-
             </ul>
+            <hr className={auth.user && activeTab === auth.user.username || activeTab === '' ? 'mt-2' : ''} />
         </nav>
     )
 }
