@@ -6,30 +6,6 @@ let loginURL = ROOT_URL + 'users/login';
 let tagsURL = ROOT_URL + 'tags'
 
 
-// const fetchArticles = async (data, setData, activeTab, auth) => {
-
-//     try {
-//         const response = await fetch(`${articlesURL + '?offset=' + data.offset + '&limit=' + data.limit}${auth.user ?
-//             activeTab !== '' && activeTab !== auth.user.username ? '&tag=' + activeTab : ''
-//             :
-//             activeTab !== '' ? '&tag=' + activeTab : ''
-//             }${auth.user && activeTab === auth.user.username ? '&author=' + activeTab : ''}`, {
-//             method: 'GET',
-//             headers: {
-//                 'Authorization': `Token ${auth.user ? auth.user.token : ''}`
-//             }
-//         })
-//         if (!response.ok) {
-//             throw new Error("Network response was not ok")
-//         }
-//         const json = await response.json()
-//         setData(prevState => ({ ...prevState, ...json }))
-
-//     } catch (error) {
-//         setData(prevState => ({ ...prevState, articlesErr: error.message }))
-//     }
-// }
-
 const fetchArticles = async (data, setData, activeTab, auth) => {
 
     try {
@@ -55,7 +31,6 @@ const fetchArticles = async (data, setData, activeTab, auth) => {
     }
 }
 
-
 const fetchTags = async (setData, auth) => {
     try {
         const response = await fetch(tagsURL, {
@@ -76,8 +51,7 @@ const fetchTags = async (setData, auth) => {
     }
 }
 
-
-const loginUser = (setError, state, auth, navigate) => {
+const loginUser = (state, auth, navigate, setState) => {
     const { email, password } = state
 
     fetch(loginURL, {
@@ -89,25 +63,28 @@ const loginUser = (setError, state, auth, navigate) => {
     })
         .then(res => {
             if (!res.ok) {
-                if (res.status === 403) {
-                    throw new Error('email or password is invalid')
-                } else {
-                    throw new Error('Network response was not ok')
-                }
+                return res.json().then(({ errors }) => {
+                    return Promise.reject(errors)
+                })
             }
-
             return res.json()
         })
-        .then(data => {
-            auth.login(data.user)
+        .then(({ user }) => {
+            auth.login(user)
             navigate('/')
         })
-        .catch((errors) => setError(errors.message))
+        .catch((error) => {
 
-    return
+            if (error.message) {
+                setState(prevState => ({ ...prevState, fetchErr: error.message }))
+            } else {
+                setState(prevState => ({ ...prevState, fetchErr: Object.keys(error)[0] + ' ' + Object.values(error)[0][0] }))
+            }
+
+        })
 }
 
-const registerUser = (setSignError, auth, state, navigate) => {
+const registerUser = (auth, state, navigate, setState) => {
     const { email, password, username } = state
 
     fetch(registerURL, {
@@ -117,16 +94,35 @@ const registerUser = (setSignError, auth, state, navigate) => {
         },
         body: JSON.stringify({ user: { username, email, password } }),
     })
-        .then(res => res.json())
-        .then(data => {
-            if (data.errors) {
-                return setSignError(data.errors)
+        .then(res => {
+            if (!res.ok) {
+                return res.json().then(({ errors }) => {
+                    return Promise.reject(errors)
+                })
             }
 
-            auth.login(data.user)
+            return res.json()
+        })
+        .then(({ user }) => {
+            auth.login(user)
             navigate('/', { replace: true })
         })
-        .catch((errors) => setSignError(errors.message))
+        .catch((error) => {
+
+            if (error.message) {
+                setState(prevState => ({ ...prevState, networkErr: error.message }))
+            } else {
+                setState((prevState) => ({
+                    ...prevState,
+                    errors: {
+                        ...prevState.errors,
+                        'email': error.email[0] && 'email ' + error.email[0],
+                        'username': error.username[0] && 'username ' + error.username[0]
+                    }
+                }))
+            }
+
+        })
 
     return
 }

@@ -12,6 +12,7 @@ import Settings from "./Settings";
 import Editor from "./Editor";
 import { useEffect } from "react";
 import { currentUserURL } from "../utils/contants";
+import Update_Article from "./Update_Article";
 
 
 function App() {
@@ -64,7 +65,7 @@ function ProtectedRoutes() {
             <Route path="/editor" element={<Editor />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/article/:slug" element={<IndividualArticle />} />
-            <Route path="*" element={<NoMatch />} />
+            <Route path="/editor/:slug" element={<Update_Article />} />
         </Routes>
     )
 }
@@ -72,14 +73,17 @@ function ProtectedRoutes() {
 
 function UnProtectedRoutes() {
     return (
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/article/:slug" element={<IndividualArticle />} />
-            <Route path={'/profile/:username'} element={<Profile />} />
-            <Route path="*" element={<NoMatch />} />
-        </Routes>
+        <>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/article/:slug" element={<IndividualArticle />} />
+                <Route path={'/profile/:username'} element={<Profile />} />
+                <Route path="*" element={<NoMatch />} />
+            </Routes>
+            {/* <Footer /> */}
+        </>
     )
 }
 
