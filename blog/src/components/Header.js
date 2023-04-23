@@ -1,4 +1,4 @@
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link} from 'react-router-dom';
 import { useAuth } from "../utils/auth"
 import { FaEdit } from 'react-icons/fa'
 import { IoIosSettings } from 'react-icons/io'
@@ -70,13 +70,13 @@ function Unauthenticated() {
     return (
         <>
             < NavLink className={(({ isActive }) => isActive ? 'text-secondary-200 !important' : 'text-secondary-100')} to="/">
-                <li className='hover:text-secondary-200 mr-8'>Home</li>
+                <li className='hover:text-secondary-200 lg:mr-8 md:mr-8 sm:mr-8'>Home</li>
             </NavLink>
             < NavLink className={(({ isActive }) => isActive ? 'text-secondary-200 !important' : 'text-secondary-100')} to="/login">
-                <li className='hover:text-secondary-200 mr-8'>Sign in</li>
+                <li className='hover:text-secondary-200 lg:mr-8 md:mr-8 sm:mr-8'>Sign in</li>
             </NavLink>
             < NavLink className={(({ isActive }) => isActive ? 'text-secondary-200 !important' : 'text-secondary-100')} to="/register">
-                <li className='hover:text-secondary-200 mr-8'>Sign up</li>
+                <li className='hover:text-secondary-200 lg:mr-8 md:mr-8 sm:mr-8'>Sign up</li>
             </NavLink>
         </>
     )
