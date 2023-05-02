@@ -1,6 +1,6 @@
 function NoMatch() {
     return (
-        <div>4O4 Not Found </div>
+        <div className="text-center text-red-500">4O4 Not Found </div>
     )
 }
 

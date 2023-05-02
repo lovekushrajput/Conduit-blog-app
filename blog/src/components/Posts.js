@@ -8,7 +8,7 @@ function Posts({ articles, error, setData }) {
     }
 
     if (articles.length === 0) {
-        return <p>No articles are here... yet.</p>
+        return <p className="mt-4">No articles are here... yet.</p>
     }
 
     return (

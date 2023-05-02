@@ -98,7 +98,7 @@ function Update_Article() {
                         placeholder="Article Title"
                         name="title"
                         onChange={handleChange}
-                        value={'njsk'}
+                        value={article.title}
                         className='border border-secondary-100 rounded w-full py-3 pl-4 text-lg outline-[#66afe9] text-secondary-200 mb-4'
                     />
 
