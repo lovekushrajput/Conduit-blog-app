@@ -109,7 +109,7 @@ function Settings() {
                     <div className='w-full flex justify-end'>
                         <button
                             type='submit'
-                            className='bg-primary-100 text-white rounded hover:bg-primary-200 py-2 px-4 text-lg outline-[#66afe9] disabled:opacity-50'
+                            className='bg-primary-100 text-white rounded hover:bg-primary-200 py-2 px-4 text-lg outline-[#66afe9] disabled:opacity-50 focus:opacity-70'
                         >
                             Update Setting
                         </button>
@@ -122,7 +122,7 @@ function Settings() {
                     <div  >
                         <button
                             onClick={handleLogout}
-                            className='border border-[#B85C5C] text-[#B85C5C] rounded hover:bg-[#B85C5C] hover:text-white py-1 px-4 text-lg outline-[#66afe9] disabled:opacity-50'
+                            className='border border-[#B85C5C] text-[#B85C5C] rounded hover:bg-[#B85C5C] hover:text-white py-1 px-4 text-lg outline-[#66afe9] disabled:opacity-50 focus:opacity-70'
                         >
                             Or click here to logout
                         </button>

@@ -46,6 +46,7 @@ function Home() {
     return (
         <>
             {!auth.user && <Banner />}
+            <p>{{}}</p>
             <main className='lg:container lg:px-10 md:container sm:container py-0 md:px-10  max-[520px]:px-2 mt-0 mb-0 mr-auto ml-auto'>
                 <section className={'lg:flex lg:justify-between mb-8'}>
                     <div className="lg:w-2/3">
