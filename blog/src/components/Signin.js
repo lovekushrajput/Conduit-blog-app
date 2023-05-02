@@ -44,7 +44,7 @@ function Signin() {
         event.preventDefault()
 
         if (state.email === '' || state.password === '') {
-        return   event.target[2].disabled = true
+            return event.target[2].disabled = true
         }
 
         loginUser(state, auth, navigate, setState)

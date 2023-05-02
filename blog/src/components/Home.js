@@ -41,8 +41,8 @@ function Home() {
         setData({ ...data, offset: offset })
     }
 
-
     const { articles, articlesErr, tags, tagsErr } = data
+    console.log(articles ? articles.length : '')
     return (
         <>
             {!auth.user && <Banner />}
@@ -56,7 +56,12 @@ function Home() {
                     <SideBar tags={tags} addTab={addTab} error={tagsErr} activeTab={activeTab} />
                 </section>
             </main>
-            {articles && <Footer />}
+
+            {articles ? articles.length === 0 ?
+                <div className="absolute bottom-0 w-full"> <Footer /> </div>
+                : <Footer />
+                : ''
+            }
         </>
     )
 }

@@ -122,7 +122,7 @@ function IndividualArticle() {
     }
 
     return (
-        <div className='mb-20'>
+        <div className='mb-20 text-center'>
             {data.article ?
                 <>
                     <ArticleUI article={data.article} />

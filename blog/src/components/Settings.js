@@ -79,9 +79,9 @@ function Settings() {
                     <textarea
                         name="bio" id="" cols="30" rows="7"
                         onChange={handleChange}
-                        value={user.bio}
+                        value={user.bio ?user.bio : ''}
                         className='border border-secondary-300 rounded w-full py-1 pl-4 text-lg outline-[#66afe9] text-secondary-200 mb-4'
-
+                        placeholder="Update your bio"
                     >
                     </textarea>
 

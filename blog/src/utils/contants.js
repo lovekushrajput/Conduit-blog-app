@@ -16,7 +16,7 @@ const fetchArticles = async (data, setData, activeTab, auth) => {
             }${auth.user && activeTab === auth.user.username ? '&author=' + activeTab : ''}`
             , {
                 method: 'GET',
-                 headers: {
+                headers: {
                     'Authorization': `Token ${auth.user ? auth.user.token : ''}`
                 }
             })
@@ -43,6 +43,7 @@ const fetchTags = async (setData, auth) => {
             throw new Error("Network response was not ok")
         }
         const json = await response.json()
+        console.log(json)
 
         setData(prevState => ({ ...prevState, tags: json.tags }))
 
