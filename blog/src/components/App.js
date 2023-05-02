@@ -5,7 +5,6 @@ import Home from "./Home";
 import Register from "./Signup";
 import Header from "./Header";
 import Login from "./Signin";
-import Footer from "./Footer";
 import NoMatch from "./NoMatch";
 import Profile from "./Profile";
 import Settings from "./Settings";
@@ -13,6 +12,7 @@ import Editor from "./Editor";
 import { useEffect } from "react";
 import { currentUserURL } from "../utils/contants";
 import Update_Article from "./Update_Article";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 
 function App() {
@@ -47,11 +47,11 @@ function App() {
 
 
     return (
-        <>
+
+        <ErrorBoundary>
             <Header />
             {auth.user && auth.user.token ? <ProtectedRoutes /> : <UnProtectedRoutes />}
-            {/* <Footer /> */}
-        </>
+        </ErrorBoundary>
     )
 }
 
@@ -82,7 +82,7 @@ function UnProtectedRoutes() {
                 <Route path={'/profile/:username'} element={<Profile />} />
                 <Route path="*" element={<NoMatch />} />
             </Routes>
-            {/* <Footer /> */}
+
         </>
     )
 }

@@ -51,7 +51,7 @@ function Signup() {
 
 
         if (state.email === '' && state.username === '' && state.password === '') {
-            return alert('Please fill the form')
+         return   e.target[3].disabled = true
         }
 
         registerUser(auth, state, navigate, setState)
@@ -104,7 +104,7 @@ function Signup() {
                         <button
                             type='submit'
                             disabled={state.errors.email || state.errors.username || state.errors.password}
-                            className='bg-primary-100 text-white rounded hover:bg-primary-200 py-2 px-4 text-lg outline-[#66afe9] disabled:opacity-50'
+                            className='bg-primary-100 text-white rounded hover:bg-primary-200 py-2 px-4 text-lg outline-[#66afe9] disabled:opacity-70 disabled:cursor-not-allowed  focus:opacity-70 focus:cursor-progress'
                         >
                             Signup
                         </button>

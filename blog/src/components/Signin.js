@@ -44,7 +44,7 @@ function Signin() {
         event.preventDefault()
 
         if (state.email === '' || state.password === '') {
-            alert('Please fill the form')
+        return   event.target[2].disabled = true
         }
 
         loginUser(state, auth, navigate, setState)
@@ -85,7 +85,7 @@ function Signin() {
                         <button
                             type='submit'
                             disabled={state.errors.email || state.errors.password}
-                            className='bg-primary-100 text-white rounded hover:bg-primary-200 py-2 px-4 text-lg outline-[#66afe9] disabled:opacity-50'
+                            className='bg-primary-100 text-white rounded hover:bg-primary-200 py-2 px-4 text-lg outline-[#66afe9] disabled:cursor-not-allowed disabled:opacity-50 focus:opacity-60 focus:cursor-progress'
                         >
                             Sign in
                         </button>
